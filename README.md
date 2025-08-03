@@ -81,6 +81,34 @@ Note: The dataset only includes the final failure label and **does not specify**
 
 ```
 
+## Preprocessing dataset
+
+### Step 1
+
+In this stage we at first read the dataset & check some info like shape of dataset that means the count of data and features using df.shape
+after that we check the first 5 data row to analysis the data values and types, using df.head()
+we can also check the df.info() and df.description() to discover more info about dataset same as null values count in each features and the type of each features and etc...
+
+### Step 2
+
+In the next step :
+
+1. We will check the count of all missing values in dataset for each column
+2. Calculate the percent of all type of failures in machines
+3. After that we will calculate the failures base on types, here is the result :
+
+```bash
+machine failures: 3.39%
+TWF     46
+HDF    115
+PWF     95
+OSF     98
+RNF     19
+```
+
+4. Then we will filter the numeric data and visualize the correlation matrix heat map to analyze the relation between data
+5. We also plots the distribution histograms of the main numerical features and colors them based on whether the machine is operational or faulty, so that the distribution differences in the two states can be compared.
+
 ## Visualizations & Outputs
 
 ### Citation:
