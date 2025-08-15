@@ -337,6 +337,69 @@ X_train_resampled, y_train_resampled = smote.fit_resample(X_train, y_train)
 
 ## Visualizations & Outputs
 
+In this section we presented the outputs from our model evaluation and feature analysis.  
+We compared **Logistic Regression**, **Random Forest**, and **XGBoost** models using multiple metrics and visualizations.
+
+---
+
+### 1. Model Performance Summary
+
+| Model               | Recall | Precision | F1-score | AUC   |
+| ------------------- | ------ | --------- | -------- | ----- |
+| Logistic Regression | 0.824  | 0.145     | 0.247    | 0.908 |
+| Random Forest       | 0.779  | 0.398     | 0.527    | 0.966 |
+| XGBoost             | 0.838  | 0.429     | 0.567    | 0.973 |
+
+**Observations:**
+
+- **XGBoost** achieved the highest **AUC (0.973)** and **recall (0.838)**, making it the best model for detecting failures.
+- **Random Forest** showed a good balance between precision and recall.
+- **Logistic Regression** had lower precision, indicating more false positives.
+
+---
+
+### 2. Confusion Matrix – XGBoost
+
+![Confusion Matrix - XGBoost](plots/confusion_matrix_xgboost.png)
+
+- **True Negatives (TN):** 1856 – Correctly predicted "No Failure".
+- **False Positives (FP):** 76 – Predicted "Failure" when it was actually "No Failure".
+- **False Negatives (FN):** 11 – Missed actual failures.
+- **True Positives (TP):** 57 – Correctly predicted failures.
+
+The low **False Negative** count shows XGBoost is effective in capturing actual failures.
+
+---
+
+### 3. ROC Curves
+
+![ROC Curves](plots/ROC_Curves.png)
+
+- **XGBoost** has the highest AUC score (0.973), followed by **Random Forest** (0.966) and **Logistic Regression** (0.908).
+- All models perform significantly better than a random classifier (diagonal line).
+
+---
+
+### 4. Feature Importance – XGBoost
+
+![Top Features](plots/top_ten_features_important.png)
+
+**Top 5 Most Important Features:**
+
+1. **Rotational speed [rpm]** – 0.3506
+2. **Torque [Nm]** – 0.2229
+3. **Tool wear [min]** – 0.1985
+4. **Air temperature [K]** – 0.0706
+5. **Type_L** – 0.0580
+
+**Insights:**
+
+- Mechanical operation metrics (**rotational speed**, **torque**, and **tool wear**) are the strongest predictors of failure.
+- Environmental and categorical features also contribute but have lower impact.
+
+**Conclusion:**  
+The results show that **XGBoost** is the most reliable model for industrial machine failure prediction, offering high recall, strong AUC, and low false negatives. Mechanical load-related features are the most critical indicators for early failure detection.
+
 ---
 
 ### Citation
